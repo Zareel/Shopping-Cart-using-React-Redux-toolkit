@@ -1,26 +1,36 @@
-Redux Toolkit
-React Course
-My React Course
+# Shopping Car using React-Redux-toolkit
+## learning
 
-Support
-Find the App Useful? You can always buy me a coffee
+[Live](https://z-shopping-cart-using-redux-toolkit.netlify.app/)
 
-Docs
+
+## Redux Toolkit
+
+
+## Docs
 Redux Toolkit Docs
 
-Install Template
+## Install Template
+```js
 npx create-react-app my-app --template redux
+```
 @latest
+```js
 npx create-react-app@latest my-app --template redux
+```
 Existing App
+```js
 npm install @reduxjs/toolkit react-redux
 @reduxjs/toolkit
+```
+
 consists of few libraries
 
-redux (core library, state management)
-immer (allows to mutate state)
-redux-thunk (handles async actions)
-reselect (simplifies reducer functions)
+- redux (core library, state management)
+- immer (allows to mutate state)
+- redux-thunk (handles async actions)
+- reselect (simplifies reducer functions)
+
 Extras
 redux devtools
 combine reducers
