@@ -10,7 +10,7 @@ const Navbar = () => {
         <h3 className="text-4xl font-semibold">Redux Toolkit</h3>
 
         <div className="flex flex-col items-start justify-center headerHover relative">
-          <ShoppingCartIcon className="font-bold" />
+          <ShoppingCartIcon />
           <div className="absolute text-xs -top-2 left-4 font-semibold p-1 h-4 bg-[#111111] rounded-full flex justify-center items-center">
             <p className="text-xs font-semibold  text-whiteText">{amount}</p>
           </div>
