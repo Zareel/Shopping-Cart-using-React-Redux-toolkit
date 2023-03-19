@@ -1,5 +1,4 @@
 # Shopping Car using React-Redux-toolkit
-<<<<<<< HEAD
 
 ## learning in progress
 
@@ -19,33 +18,6 @@ npm install @reduxjs/toolkit react-redux
 
 ### @reduxjs/toolkit
 
-=======
-## learning in progress
-
-[Live](https://z-shopping-cart-using-redux-toolkit.netlify.app/)
-
-
-## Redux Toolkit
-
-
-## Docs
-Redux Toolkit Docs
-
-## Install Template
-```js
-npx create-react-app my-app --template redux
-```
-@latest
-```js
-npx create-react-app@latest my-app --template redux
-```
-Existing App
-```js
-npm install @reduxjs/toolkit react-redux
-@reduxjs/toolkit
-```
-
->>>>>>> 31a12e4ef0a53bc79a3ba8086b67abcfd24e68bd
 consists of few libraries
 
 - redux (core library, state management)
