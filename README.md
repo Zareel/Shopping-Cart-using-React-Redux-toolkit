@@ -6,7 +6,7 @@
 - Redux toolkit
 - TaiwindCSS
 
-[Live](https://z-shopping-cart-using-redux-toolkit.netlify.app/)
+![Screenshot (410)](https://user-images.githubusercontent.com/110910838/226206267-2b240465-d5b3-42b1-8712-ff699f9d967f.png)
 
 ## Redux Toolkit
 
