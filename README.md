@@ -1,6 +1,10 @@
-# Shopping Car using React-Redux-toolkit
+# Shopping Cart using React-Redux-toolkit
 
 ## learning in progress
+## technologies used
+- React JS
+- Redux toolkit
+- TaiwindCSS
 
 [Live](https://z-shopping-cart-using-redux-toolkit.netlify.app/)
 
