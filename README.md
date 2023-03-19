@@ -1,31 +1,40 @@
-Redux Toolkit
-React Course
-My React Course
+# Shopping Car using React-Redux-toolkit
 
-Support
-Find the App Useful? You can always buy me a coffee
+## learning in progress
 
-Docs
-Redux Toolkit Docs
+[Live](https://z-shopping-cart-using-redux-toolkit.netlify.app/)
 
-Install Template
-npx create-react-app my-app --template redux
-@latest
-npx create-react-app@latest my-app --template redux
-Existing App
+## Redux Toolkit
+
+## Docs
+
+[Redux Toolkit Docs](https://redux-toolkit.js.org/)
+
+## Install redus-toolkit
+
+```sh
 npm install @reduxjs/toolkit react-redux
-@reduxjs/toolkit
+```
+
+### @reduxjs/toolkit
+
 consists of few libraries
 
-redux (core library, state management)
-immer (allows to mutate state)
-redux-thunk (handles async actions)
-reselect (simplifies reducer functions)
+- redux (core library, state management)
+- immer (allows to mutate state)
+- redux-thunk (handles async actions)
+- reselect (simplifies reducer functions)
+
 Extras
-redux devtools
-combine reducers
-react-redux
-connects our app to
+
+- redux devtools
+- combine reducers
+- react-redux
+- connects our app to
+
+### Setup Store
+
+- create store.js
 
 ### Setup Store
 
@@ -275,8 +284,11 @@ const CartContainer = () => {
 export default CartContainer;
 ```
 
-Remove, Increase, Decrease
-cartSlice.js
+### Remove, Increase, Decrease
+
+- cartSlice.js
+
+```js
 import { createSlice } from '@reduxjs/toolkit';
 import cartItems from '../../cartItems';
 
@@ -323,314 +335,92 @@ export const { clearCart, removeItem, increase, decrease, calculateTotals } =
 cartSlice.actions;
 
 export default cartSlice.reducer;
-CartItem.js
-import React from 'react';
-import { ChevronDown, ChevronUp } from '../icons';
+```
 
-import { useDispatch } from 'react-redux';
-import { removeItem, increase, decrease } from '../features/cart/cartSlice';
+- CartItem.js
+
+```js
+import React from "react";
+import { ChevronDown, ChevronUp } from "../icons";
+
+import { useDispatch } from "react-redux";
+import { removeItem, increase, decrease } from "../features/cart/cartSlice";
 
 const CartItem = ({ id, img, title, price, amount }) => {
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-return (
-
-<article className='cart-item'>
-<img src={img} alt={title} />
-<div>
-<h4>{title}</h4>
-<h4 className='item-price'>${price}</h4>
-{/_ remove button _/}
-<button
-className='remove-btn'
-onClick={() => {
-dispatch(removeItem(id));
-}} >
-remove
-</button>
-</div>
-<div>
-{/_ increase amount _/}
-<button
-className='amount-btn'
-onClick={() => {
-dispatch(increase({ id }));
-}} >
-<ChevronUp />
-</button>
-{/_ amount _/}
-<p className='amount'>{amount}</p>
-{/_ decrease amount _/}
-<button
-className='amount-btn'
-onClick={() => {
-if (amount === 1) {
-dispatch(removeItem(id));
-return;
-}
-dispatch(decrease({ id }));
-}} >
-<ChevronDown />
-</button>
-</div>
-</article>
-);
+  return (
+    <article className="cart-item">
+      <img src={img} alt={title} />
+      <div>
+        <h4>{title}</h4>
+        <h4 className="item-price">${price}</h4>
+        {/_ remove button _/}
+        <button
+          className="remove-btn"
+          onClick={() => {
+            dispatch(removeItem(id));
+          }}
+        >
+          remove
+        </button>
+      </div>
+      <div>
+        {/_ increase amount _/}
+        <button
+          className="amount-btn"
+          onClick={() => {
+            dispatch(increase({ id }));
+          }}
+        >
+          <ChevronUp />
+        </button>
+        {/_ amount _/}
+        <p className="amount">{amount}</p>
+        {/_ decrease amount _/}
+        <button
+          className="amount-btn"
+          onClick={() => {
+            if (amount === 1) {
+              dispatch(removeItem(id));
+              return;
+            }
+            dispatch(decrease({ id }));
+          }}
+        >
+          <ChevronDown />
+        </button>
+      </div>
+    </article>
+  );
 };
 
 export default CartItem;
-App.js
-import { useEffect } from 'react';
-import Navbar from './components/Navbar';
-import CartContainer from './components/CartContainer';
-import { useSelector, useDispatch } from 'react-redux';
-import { calculateTotals } from './features/cart/cartSlice';
+```
+
+- App.js
+
+```js
+import { useEffect } from "react";
+import Navbar from "./components/Navbar";
+import CartContainer from "./components/CartContainer";
+import { useSelector, useDispatch } from "react-redux";
+import { calculateTotals } from "./features/cart/cartSlice";
 
 function App() {
-const { cartItems } = useSelector((state) => state.cart);
-const dispatch = useDispatch();
-useEffect(() => {
-dispatch(calculateTotals());
-}, [cartItems]);
+  const { cartItems } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(calculateTotals());
+  }, [cartItems]);
 
-return (
-
-<main>
-<Navbar />
-<CartContainer />
-</main>
-);
+  return (
+    <main>
+      <Navbar />
+      <CartContainer />
+    </main>
+  );
 }
 
 export default App;
-Modal
-create components/Modal.js
-const Modal = () => {
-return (
-
-<aside className='modal-container'>
-<div className='modal'>
-<h4>Remove all items from your shopping cart?</h4>
-<div className='btn-container'>
-<button type='button' className='btn confirm-btn'>
-confirm
-</button>
-<button type='button' className='btn clear-btn'>
-cancel
-</button>
-</div>
-</div>
-</aside>
-);
-};
-export default Modal;
-App.js
-return (
-
-  <main>
-    <Modal />
-    <Navbar />
-    <CartContainer />
-  </main>
-);
-modal slice
-create features/modal/modalSlice.js
-import { createSlice } from '@reduxjs/toolkit';
-const initialState = {
-  isOpen: false,
-};
-
-const modalSlice = createSlice({
-name: 'modal',
-initialState,
-reducers: {
-openModal: (state, action) => {
-state.isOpen = true;
-},
-closeModal: (state, action) => {
-state.isOpen = false;
-},
-},
-});
-
-export const { openModal, closeModal } = modalSlice.actions;
-export default modalSlice.reducer;
-App.js
-const { isOpen } = useSelector((state) => state.modal);
-
-return (
-
-  <main>
-    {isOpen && <Modal />}
-    <Navbar />
-    <CartContainer />
-  </main>
-);
-toggle modal
-CartContainer.js
-import { openModal } from '../features/modal/modalSlice';
-
-return (
-<button
-className='btn clear-btn'
-onClick={() => {
-dispatch(openModal());
-}}
-
->
-
-    clear cart
-
-  </button>
-);
-Modal.js
-import { closeModal } from '../features/modal/modalSlice';
-import { useDispatch } from 'react-redux';
-import { clearCart } from '../features/cart/cartSlice';
-
-const Modal = () => {
-const dispatch = useDispatch();
-
-return (
-
-<aside className='modal-container'>
-<div className='modal'>
-<h4>Remove all items from your shopping cart?</h4>
-<div className='btn-container'>
-<button
-type='button'
-className='btn confirm-btn'
-onClick={() => {
-dispatch(clearCart());
-dispatch(closeModal());
-}} >
-confirm
-</button>
-<button
-type='button'
-className='btn clear-btn'
-onClick={() => {
-dispatch(closeModal());
-}} >
-cancel
-</button>
-</div>
-</div>
-</aside>
-);
-};
-export default Modal;
-async functionality with createAsyncThunk
-Course API
-
-https://course-api.com/react-useReducer-cart-project
-
-cartSlice.js
-
-action type
-
-callback function
-
-lifecycle actions
-
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
-const url = 'https://course-api.com/react-useReducer-cart-project';
-
-export const getCartItems = createAsyncThunk('cart/getCartItems', () => {
-return fetch(url)
-.then((resp) => resp.json())
-.catch((err) => console.log(error));
-});
-
-const cartSlice = createSlice({
-name: 'cart',
-initialState,
-extraReducers: {
-[getCartItems.pending]: (state) => {
-state.isLoading = true;
-},
-[getCartItems.fulfilled]: (state, action) => {
-console.log(action);
-state.isLoading = false;
-state.cartItems = action.payload;
-},
-[getCartItems.rejected]: (state) => {
-state.isLoading = false;
-},
-},
-});
-App.js
-import { calculateTotals, getCartItems } from './features/cart/cartSlice';
-
-function App() {
-const { cartItems, isLoading } = useSelector((state) => state.cart);
-
-useEffect(() => {
-dispatch(getCartItems());
-}, []);
-
-if (isLoading) {
-return (
-
-<div className='loading'>
-<h1>Loading...</h1>
-</div>
-);
-}
-
-return (
-
-<main>
-{isOpen && <Modal />}
-<Navbar />
-<CartContainer />
-</main>
-);
-}
-
-export default App;
-Options
-npm install axios
-cartSlice.js
-export const getCartItems = createAsyncThunk(
-'cart/getCartItems',
-async (name, thunkAPI) => {
-try {
-// console.log(name);
-// console.log(thunkAPI);
-// console.log(thunkAPI.getState());
-// thunkAPI.dispatch(openModal());
-const resp = await axios(url);
-
-      return resp.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue('something went wrong');
-    }
-
-}
-);
-The extraReducers "builder callback" notation
-cart/cartSlice
-
-const cartSlice = createSlice({
-name: 'cart',
-initialState,
-reducers: {
-// reducers
-},
-extraReducers: (builder) => {
-builder
-.addCase(getCartItems.pending, (state) => {
-state.isLoading = true;
-})
-.addCase(getCartItems.fulfilled, (state, action) => {
-// console.log(action);
-state.isLoading = false;
-state.cartItems = action.payload;
-})
-.addCase(getCartItems.rejected, (state, action) => {
-console.log(action);
-state.isLoading = false;
-});
-},
-});
+```
