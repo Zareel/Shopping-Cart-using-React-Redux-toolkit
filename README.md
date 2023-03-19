@@ -1,5 +1,5 @@
 # Shopping Car using React-Redux-toolkit
-## learning
+## learning in progress
 
 [Live](https://z-shopping-cart-using-redux-toolkit.netlify.app/)
 
