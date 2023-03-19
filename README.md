@@ -127,70 +127,76 @@ const Navbar = () => {
 export default Navbar;
 ```
 
-Hero Icons
-Hero Icons
-nav svg {
-width: 40px;
-color: var(--clr-white);
-}
-Setup Cart
-cartSlice.js
-import cartItems from '../../cartItems';
+### Setup Cart
+
+- cartSlice.js
+
+```js
+import cartItems from "../../cartItems";
 
 const initialState = {
-cartItems: cartItems,
-amount: 0,
-total: 0,
-isLoading: true,
+  cartItems: cartItems,
+  amount: 0,
+  total: 0,
+  isLoading: true,
 };
-create CartContainer.js and CartItem.js
-CartContainer.js
-import React from 'react';
-import CartItem from './CartItem';
-import { useSelector } from 'react-redux';
+```
+
+### create CartContainer.js and CartItem.js
+
+- CartContainer.js
+
+```js
+import React from "react";
+import CartItem from "./CartItem";
+import { useSelector } from "react-redux";
 
 const CartContainer = () => {
-const { cartItems, total, amount } = useSelector((state) => state.cart);
+  const { cartItems, total, amount } = useSelector((state) => state.cart);
 
-if (amount < 1) {
-return (
-<section className='cart'>
-{/_ cart header _/}
-<header>
-<h2>your bag</h2>
-<h4 className='empty-cart'>is currently empty</h4>
-</header>
-</section>
-);
-}
-return (
-<section className='cart'>
-{/_ cart header _/}
-<header>
-<h2>your bag</h2>
-</header>
-{/_ cart items _/}
-<div>
-{cartItems.map((item) => {
-return <CartItem key={item.id} {...item} />;
-})}
-</div>
-{/_ cart footer _/}
-<footer>
-<hr />
-<div className='cart-total'>
-<h4>
-total <span>${total}</span>
-</h4>
-</div>
-<button className='btn clear-btn'>clear cart</button>
-</footer>
-</section>
-);
+  if (amount < 1) {
+    return (
+      <section className="cart">
+        {/_ cart header _/}
+        <header>
+          <h2>your bag</h2>
+          <h4 className="empty-cart">is currently empty</h4>
+        </header>
+      </section>
+    );
+  }
+  return (
+    <section className="cart">
+      {/_ cart header _/}
+      <header>
+        <h2>your bag</h2>
+      </header>
+      {/_ cart items _/}
+      <div>
+        {cartItems.map((item) => {
+          return <CartItem key={item.id} {...item} />;
+        })}
+      </div>
+      {/_ cart footer _/}
+      <footer>
+        <hr />
+        <div className="cart-total">
+          <h4>
+            total <span>${total}</span>
+          </h4>
+        </div>
+        <button className="btn clear-btn">clear cart</button>
+      </footer>
+    </section>
+  );
 };
 
 export default CartContainer;
-CartItem.js
+```
+
+- CartItem.js
+
+```js
 import React from 'react';
 import { ChevronDown, ChevronUp } from '../icons';
 
@@ -241,26 +247,34 @@ const ACTION_TYPE = 'ACTION_TYPE';
 const actionCreator = (payload) => {
 return { type: ACTION_TYPE, payload: payload };
 };
-CartContainer.js
-import React from 'react';
-import CartItem from './CartItem';
-import { useDispatch, useSelector } from 'react-redux';
+
+```
+
+### CartContainer.js
+
+```js
+import React from "react";
+import CartItem from "./CartItem";
+import { useDispatch, useSelector } from "react-redux";
 
 const CartContainer = () => {
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-return (
-<button
-className='btn clear-btn'
-onClick={() => {
-dispatch(clearCart());
-}} >
-clear cart
-</button>
-);
+  return (
+    <button
+      className="btn clear-btn"
+      onClick={() => {
+        dispatch(clearCart());
+      }}
+    >
+      clear cart
+    </button>
+  );
 };
 
 export default CartContainer;
+```
+
 Remove, Increase, Decrease
 cartSlice.js
 import { createSlice } from '@reduxjs/toolkit';
@@ -320,6 +334,7 @@ const CartItem = ({ id, img, title, price, amount }) => {
 const dispatch = useDispatch();
 
 return (
+
 <article className='cart-item'>
 <img src={img} alt={title} />
 <div>
@@ -378,6 +393,7 @@ dispatch(calculateTotals());
 }, [cartItems]);
 
 return (
+
 <main>
 <Navbar />
 <CartContainer />
@@ -390,6 +406,7 @@ Modal
 create components/Modal.js
 const Modal = () => {
 return (
+
 <aside className='modal-container'>
 <div className='modal'>
 <h4>Remove all items from your shopping cart?</h4>
@@ -474,6 +491,7 @@ const Modal = () => {
 const dispatch = useDispatch();
 
 return (
+
 <aside className='modal-container'>
 <div className='modal'>
 <h4>Remove all items from your shopping cart?</h4>
@@ -553,6 +571,7 @@ dispatch(getCartItems());
 
 if (isLoading) {
 return (
+
 <div className='loading'>
 <h1>Loading...</h1>
 </div>
@@ -560,6 +579,7 @@ return (
 }
 
 return (
+
 <main>
 {isOpen && <Modal />}
 <Navbar />

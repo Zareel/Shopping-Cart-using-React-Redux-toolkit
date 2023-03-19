@@ -1,10 +1,13 @@
 import "./App.css";
+import Navbar from "./components/Navbar";
+import CartContainer from "./components/CartContainer";
 
 function App() {
   return (
-    <div className="App w-full h-screen bg-[#111111] ">
+    <div className="App w-full h-full bg-[#111111] ">
       <div className="max-w-4xl mx-auto text-white ">
-        <h1 className="text-3xl font-bold py-10">Redux-toolkit</h1>
+        <Navbar />
+        <CartContainer />
       </div>
     </div>
   );
